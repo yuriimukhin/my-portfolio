@@ -1,0 +1,246 @@
+@import './theme.less';
+
+header {
+  width: 100%;
+  //height: 56px;
+  //   border-bottom: 2px solid #f1f1f1;
+  //   padding: 0 20px;
+  background-color: @black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    padding: 15px;
+    z-index: 5;
+    span {
+      content: '';
+      background-color: @grey;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      display: block;
+    }
+  }
+}
+
+.burger {
+  display: none;
+}
+
+.menu-arrow {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .burger {
+    cursor: pointer;
+    width: 26px;
+    height: 20px;
+    position: relative;
+    z-index: 5;
+    display: block;
+    margin: 15px;
+
+    span,
+    &:before,
+    &::after {
+      left: 0;
+      position: absolute;
+      width: 100%;
+      height: 10%;
+      background-color: @grey;
+      transition: all 0.3s ease 0s;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+
+    span {
+      top: 50%;
+      transform: translate(0px, -50%);
+    }
+
+    &.open {
+      span {
+        transform: scale(0) translate(0px, -50%);
+      }
+      &::before {
+        top: 50%;
+        transform: rotate(-45deg) translate(0px, -50%);
+      }
+
+      &::after {
+        bottom: 50%;
+        transform: rotate(45deg) translate(0px, 50%);
+      }
+    }
+  }
+}
+
+.menu {
+  ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+
+    &.sub-menu {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      flex-direction: column;
+      top: 100%;
+      right: 0;
+      min-width: 200px;
+      background-color: @grey;
+
+      li {
+        padding: 15px;
+        color: @navy;
+      }
+    }
+
+    li {
+      color: @grey;
+      font-size: 20px;
+      position: relative;
+      padding: 15px;
+    }
+
+    @media (min-width: 768px) {
+      li {
+        display: inline-block;
+        position: relative;
+        color: @grey;
+        cursor: pointer;
+      }
+
+      li:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: @red;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+      }
+
+      li:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+
+      &.sub-menu {
+        transform: translate(0, -10%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: all 0.3s ease 0s;
+        padding: 10px 0;
+      }
+    }
+  }
+
+  .menu-wrapper {
+    @media (max-width: 768px) {
+      ul {
+        flex-flow: column nowrap;
+        padding-left: 60px;
+        padding-top: 60px;
+      }
+      overflow: auto;
+      background-color: @navy;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      transition: left 0.3s ease-in-out;
+
+      li {
+        color: @grey;
+      }
+    }
+  }
+}
+
+#root.pointer .menu.closed {
+  li.active .sub-menu,
+  li:hover .sub-menu {
+    background-color: #fafafa;
+    visibility: visible;
+    transform: translate(0, 0);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+#root.touch {
+  li.active .sub-menu {
+    background-color: #fafafa;
+    visibility: visible;
+    transform: translate(0, 0);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.menu.closed > .menu-wrapper {
+  @media (max-width: 768px) {
+    left: 100%;
+  }
+}
+
+.menu.open > .menu-wrapper {
+  @media (max-width: 768px) {
+    left: 0;
+  }
+}
+
+div#root.lock {
+  /*overflow: hidden;*/
+}
+
+div#root.touch {
+  .menu-arrow {
+    display: block;
+    width: 0;
+    height: 0;
+    transition: transform 0.3s ease 0s;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid;
+    margin-left: 5px;
+    border-top-color: #fff;
+    @media (max-width: 768px) {
+      border-top-color: #0d2538;
+    }
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  li.active {
+    span.menu-arrow {
+      transform: rotateX(180deg);
+    }
+  }
+}

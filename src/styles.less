@@ -1,0 +1,37 @@
+@import url('./theme.less');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+// @import url('../node_modules/codemirror/lib/codemirror.css');
+// @import url('../node_modules/codemirror/theme/ayu-mirage.css');
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: @black;
+  font-family: 'Lato', sans-serif;
+}
+
+div#root {
+  height: 100vh;
+  overflow: auto;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: @navy @black;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: @black;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: @navy;
+  border-radius: 0;
+  border: 3px solid @navy;
+}

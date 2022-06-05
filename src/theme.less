@@ -1,0 +1,38 @@
+@grey: #dddddd;
+@black: #222831;
+@navy: #30475e;
+@red: #f05454;
+
+.layout {
+  max-width: 1200px;
+  margin: auto;
+}
+
+button {
+  background-color: @red;
+  color: @grey;
+  padding: 10px 30px;
+  border-radius: 4px;
+  border: 1px solid @red;
+  cursor: pointer;
+
+  font-size: 20px;
+  &:hover {
+    border: 1px solid @red;
+    background-color: @black;
+    color: @red;
+  }
+}
+
+p {
+  color: @grey;
+  font-size: 18px;
+}
+
+h1 {
+  color: @red;
+}
+
+h2 {
+  color: @grey;
+}
